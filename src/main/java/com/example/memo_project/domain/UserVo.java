@@ -4,6 +4,7 @@ package com.example.memo_project.domain;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 
@@ -19,6 +20,10 @@ public class UserVo implements UserDetails {
     public String name;
     public String phone;
 
+    public UserVo encPwd(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.password = bCryptPasswordEncoder.encode(this.password);
+        return this;
+    }
 
 
     @Override

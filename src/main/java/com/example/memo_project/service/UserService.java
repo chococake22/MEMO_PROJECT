@@ -29,8 +29,6 @@ public class UserService {
         // 아이디 중복 확인
         UserVo userVoChk = userMapper.findUserByUserId(userVo.userId);
 
-        System.out.println(userVoChk);
-
         if (userVoChk == null) {
 
             // 비밀번호 체크 확인
@@ -40,7 +38,8 @@ public class UserService {
                 resultMap.put("message", "두 비밀번호가 다릅니다.");
                 resultMap.put("data", null);
             } else {
-                System.out.println(userVo);
+                // 비밀번호 암호화
+                userVo.encPwd(bCryptPasswordEncoder);
                 userMapper.insertUser(userVo);
                 resultMap.put("result", true);
                 resultMap.put("message", "계정이 생성되었습니다.");
