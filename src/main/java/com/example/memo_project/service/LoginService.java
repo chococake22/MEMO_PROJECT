@@ -20,18 +20,16 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-
         UserVo userVo = userMapper.findUserByUserId(userId);
 
         if (userVo.getUserId().equals("") || userVo.getUserId() == null) {
             throw new RuntimeException("존재하지 않는 아이디입니다.");
         }
 
-
         return UserVo.builder()
                 .userId("apple12")
                 .password(passwordEncoder.encode("1234"))
+                .role("USER_ADMIN")
                 .phone("01012341234")
                 .build();
     }

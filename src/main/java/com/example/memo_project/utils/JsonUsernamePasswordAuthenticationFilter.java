@@ -63,7 +63,10 @@ public class JsonUsernamePasswordAuthenticationFilter extends AbstractAuthentica
         String username = loginDto.getUserId();
         String password = loginDto.getPassword();
 
+        // 사용자 인증
         UserDetails userVo = loginService.loadUserByUsername(username);
+
+        System.out.println("Json filter");
 
         if (!bCryptPasswordEncoder.matches("1234", userVo.getPassword()) ) {
             throw new BadCredentialsException("비번 틀렸다.");
